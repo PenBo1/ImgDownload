@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片下载助手</title>
+    <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片下载助手</h1>
+            <div class="controls">
+                <button id="selectAll" class="btn">全选</button>
+                <button id="downloadSelected" class="btn primary">下载选中</button>
+                <button id="downloadAll" class="btn success">下载全部</button>
+            </div>
+        </header>
+        <div class="filter-bar">
+            <input type="text" id="search" placeholder="搜索图片...">
+            <select id="sizeFilter">
+                <option value="all">所有尺寸</option>
+                <option value="large">大图</option>
+                <option value="medium">中等</option>
+                <option value="small">小图</option>
+            </select>
+        </div>
+        <div id="imageList" class="image-grid">
+            <!-- 图片将通过JS动态加载 -->
+        </div>
+    </div>
+    <script src="js/popup.js"></script>
+</body>
+</html>
