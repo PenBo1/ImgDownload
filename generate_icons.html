@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成图标</title>
+</head>
+<body>
+    <h2>Chrome插件图标生成器</h2>
+    <p>请按照以下步骤生成图标：</p>
+    <ol>
+        <li>打开 icons/icon.svg 文件</li>
+        <li>使用在线SVG转PNG工具（如 convertio.co）或设计软件</li>
+        <li>生成以下尺寸的PNG文件：
+            <ul>
+                <li>icon16.png (16x16)</li>
+                <li>icon32.png (32x32)</li>
+                <li>icon48.png (48x48)</li>
+                <li>icon128.png (128x128)</li>
+            </ul>
+        </li>
+        <li>将生成的PNG文件放入 icons/ 文件夹</li>
+    </ol>
+    
+    <h3>或者使用以下Canvas代码生成：</h3>
+    <canvas id="canvas" width="128" height="128" style="border: 1px solid #ccc;"></canvas>
+    <br><br>
+    <button onclick="generateIcon(16)">生成 16x16</button>
+    <button onclick="generateIcon(32)">生成 32x32</button>
+    <button onclick="generateIcon(48)">生成 48x48</button>
+    <button onclick="generateIcon(128)">生成 128x128</button>
+    
+    <script>
+        function generateIcon(size) {
+            const canvas = document.getElementById('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // 创建渐变背景
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // 绘制圆形背景
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // 绘制白色边框
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = size > 32 ? 3 : 2;
+            ctx.stroke();
+            
+            // 绘制图片框架
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = size > 32 ? 2 : 1;
+            ctx.strokeRect(size*0.2, size*0.3, size*0.6, size*0.4);
+            
+            // 绘制下载箭头
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = size > 32 ? 3 : 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // 箭头主体
+            ctx.beginPath();
+            ctx.moveTo(size/2, size*0.75);
+            ctx.lineTo(size/2, size*0.9);
+            ctx.stroke();
+            
+            // 箭头头部
+            ctx.beginPath();
+            ctx.moveTo(size/2 - size*0.08, size*0.85);
+            ctx.lineTo(size/2, size*0.9);
+            ctx.lineTo(size/2 + size*0.08, size*0.85);
+            ctx.stroke();
+            
+            // 下载图片
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
