@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "ImgDownload - 网页图片下载器",
+  "version": "1.0.0",
+  "description": "一键下载网页中的所有图片，支持批量下载和预览",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "scripting",
+    "notifications",
+    "contextMenus"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ImgDownload",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
